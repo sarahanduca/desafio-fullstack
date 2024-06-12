@@ -1,3 +1,12 @@
+@keyframes modalOpen {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 50%;
+  }
+}
+
 .developerModalContainer {
   display: flex;
   flex-direction: column;
@@ -15,6 +24,8 @@
 
   background-color: #fff;
   width: 500px;
+
+  animation: modalOpen 0.6s ease-in-out forwards;
 
   h2 {
     font-size: 1.2rem;

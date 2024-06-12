@@ -14,8 +14,8 @@ export const DeveloperCard: FC<{ developer: Developer }> = ({ developer }) => {
   const { id, name, gender, birthday, age, hobby, level } = developer;
   const { openModal, setDeveloperId } = useDeveloperModal();
 
-  const handleEditDeveloper = useCallback(
-    (e: any) => {
+  const handleEditDeveloper = useCallback<MouseEventHandler<HTMLElement>>(
+    (e) => {
       e.stopPropagation();
       setDeveloperId(id);
       openModal();

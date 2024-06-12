@@ -58,6 +58,22 @@ export class LevelService {
     return level;
   }
 
+  async findDevelopers(id: number) {
+    const levelExists = await this.knex('level')
+      .where('id', id)
+      .count('* as count');
+
+    if (levelExists[0].count == 0) {
+      throw new NotFoundLevel();
+    }
+
+    const developers = await this.knex('developer')
+      .select('*')
+      .where('level_id', id);
+
+    return developers;
+  }
+
   async update(id: number, updateLevelDto: UpdateLevelDto) {
     const { level } = updateLevelDto;
 

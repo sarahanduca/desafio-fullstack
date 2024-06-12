@@ -3,7 +3,7 @@
 
   .listContent {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
 
     gap: 2rem;
   }
@@ -38,4 +38,12 @@
   align-items: center;
 
   color: #757575;
+}
+
+@media screen and (max-width: 728px) {
+  .developerListContainer {
+    .listContent {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
 }

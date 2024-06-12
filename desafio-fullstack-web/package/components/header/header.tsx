@@ -4,9 +4,13 @@ import { FC, useState } from "react";
 
 import styles from "./header.module.scss";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const Header: FC = () => {
-  const [isSelected, setIsSelected] = useState<"level" | "developer">("level");
+  const route = usePathname();
+  const [isSelected, setIsSelected] = useState<"level" | "developer">(
+    route === "/niveis" ? "level" : "developer"
+  );
 
   return (
     <div className={styles.headerContainer}>
@@ -19,6 +23,7 @@ export const Header: FC = () => {
       >
         Níveis
       </Link>
+
       <Link
         href={"/desenvolvedores"}
         className={`${styles.redirectLink} ${

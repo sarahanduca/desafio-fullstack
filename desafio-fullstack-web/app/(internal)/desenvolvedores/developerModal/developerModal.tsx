@@ -2,6 +2,8 @@
 
 import { FC, useCallback, useEffect, useState } from "react";
 import { useDeveloperModal } from "./developerModal.context";
+import InputMask from "react-input-mask";
+import moment from "moment";
 import type { Developer, Level } from "@/package/interfaces";
 
 import { Input } from "@/package/components/input";
@@ -9,11 +11,11 @@ import { Button } from "@/package/components/button";
 import { createDeveloper } from "@/package/services/createDeveloper";
 import { getDeveloperById } from "@/package/services/getDeveloperById";
 import { updateDeveloper } from "@/package/services/updateDeveloper";
-
-import styles from "./developerModal.module.scss";
 import { useLevelModal } from "../../niveis/levelModal";
 import { formatDate } from "@/package/utils";
 import { Select } from "@/package/components/select/select";
+
+import styles from "./developerModal.module.scss";
 
 export const DeveloperModal: FC = () => {
   const { developerId, closeModal, mutate, isOpen, isLoading } =
@@ -66,10 +68,19 @@ export const DeveloperModal: FC = () => {
   const handleSubmit = useCallback(
     async (e: { preventDefault: () => void }) => {
       e.preventDefault();
+      const formattedDate = moment(formValues?.birthday, "DD/MM/YYYY").format(
+        "YYYY-MM-DD"
+      );
+      console.log("date", formValues?.birthday);
+
+      // setFormValues((prev) => ({ ...prev!, birthday: formattedDate }));
+      const updatedFormValues = { ...formValues, birthday: formattedDate };
+
+      console.log("formValues", formValues);
       if (formValues)
         developerId
-          ? await updateDeveloper(developerId, formValues)
-          : await createDeveloper(formValues);
+          ? await updateDeveloper(developerId, updatedFormValues)
+          : await createDeveloper(updatedFormValues);
 
       mutate();
       closeModal();
@@ -128,12 +139,16 @@ export const DeveloperModal: FC = () => {
               value={formValues?.hobby}
               onChange={handleInputChange}
             />
-            <Input
-              name="birthday"
-              label="Aniversário"
+
+            <InputMask
+              mask="99/99/9999"
               value={formValues?.birthday && formatDate(formValues.birthday)}
               onChange={handleInputChange}
-            />
+            >
+              {(inputProps: {}) => (
+                <Input {...inputProps} name="birthday" label="Aniversário" />
+              )}
+            </InputMask>
             <Select
               name="level_id"
               value={formValues?.level_id}

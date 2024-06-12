@@ -36,6 +36,11 @@ export class LevelController {
     return this.levelService.findOne(+id);
   }
 
+  @Get(':id/developers')
+  findDevelopers(@Param('id') id: string) {
+    return this.levelService.findDevelopers(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLevelDto: UpdateLevelDto) {
     return this.levelService.update(+id, updateLevelDto);

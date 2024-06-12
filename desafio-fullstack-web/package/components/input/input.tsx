@@ -7,11 +7,17 @@ export const Input: FC<{
   name: string;
   label: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}> = ({ value, name, label, onChange }) => {
+}> = ({ value, name, label, onChange, ...props }) => {
   return (
     <div className={styles.inputContainer}>
       <label htmlFor={name}>{label}</label>
-      <input type="text" value={value} name={name} onChange={onChange} />
+      <input
+        type="text"
+        value={value}
+        name={name}
+        onChange={onChange}
+        {...props}
+      />
     </div>
   );
 };
