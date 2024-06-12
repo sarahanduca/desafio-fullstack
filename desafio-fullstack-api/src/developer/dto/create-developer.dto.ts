@@ -1,9 +1,9 @@
 import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateDeveloperDto {
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  id: string;
+  id: number;
 
   @IsNumber()
   @IsNotEmpty()
@@ -20,10 +20,6 @@ export class CreateDeveloperDto {
   @IsDateString()
   @IsNotEmpty()
   birthday: Date;
-
-  @IsNumber()
-  @IsNotEmpty()
-  age: number;
 
   @IsString()
   @IsNotEmpty()

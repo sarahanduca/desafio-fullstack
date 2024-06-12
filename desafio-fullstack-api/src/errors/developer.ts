@@ -11,3 +11,15 @@ export class NotFoundDeveloper extends HttpException {
     );
   }
 }
+
+export class CantCreateWithInvalidLevel extends HttpException {
+  constructor() {
+    super(
+      {
+        status: HttpStatus.BAD_REQUEST,
+        error: 'Cadastro de desenvolvedor não permitido com nível inexistente',
+      },
+      HttpStatus.BAD_REQUEST,
+    );
+  }
+}

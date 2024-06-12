@@ -14,7 +14,7 @@ import { DeveloperService } from './developer.service';
 import { CreateDeveloperDto } from './dto/create-developer.dto';
 import { UpdateDeveloperDto } from './dto/update-developer.dto';
 
-@Controller('developers')
+@Controller('developer')
 export class DeveloperController {
   constructor(private readonly developerService: DeveloperService) {}
 
@@ -24,7 +24,7 @@ export class DeveloperController {
   }
 
   @Get()
-  findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 2) {
+  findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 10) {
     page = Number(page);
     limit = Number(limit);
 

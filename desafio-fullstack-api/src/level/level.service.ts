@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateLevelDto } from './dto/create-level.dto';
 import { UpdateLevelDto } from './dto/update-level.dto';
 import { InjectConnection } from 'nestjs-knex';
@@ -27,12 +27,7 @@ export class LevelService {
     const totalLevels: number = Number(total[0].count);
 
     if (!totalLevels) {
-      throw new HttpException(
-        {
-          status: HttpStatus.NOT_FOUND,
-        },
-        HttpStatus.NOT_FOUND,
-      );
+      throw new NotFoundLevel();
     }
     const levels = await this.knex('level')
       .select('*')

@@ -3,24 +3,35 @@ import { CreateDeveloperDto } from './dto/create-developer.dto';
 import { UpdateDeveloperDto } from './dto/update-developer.dto';
 import { Knex } from 'knex';
 import { InjectConnection } from 'nestjs-knex';
-import { NotFoundDeveloper } from 'src/errors/developer';
+import {
+  CantCreateWithInvalidLevel,
+  NotFoundDeveloper,
+} from 'src/errors/developer';
 
 @Injectable()
 export class DeveloperService {
   constructor(@InjectConnection() private readonly knex: Knex) {}
 
   async create(createDeveloperDto: CreateDeveloperDto) {
-    const { name, gender, birthday, age, level_id, hobby } = createDeveloperDto;
+    const { name, gender, birthday, level_id, hobby } = createDeveloperDto;
+
+    const levelExists = await this.knex('level')
+      .where('id', level_id)
+      .count('* as count');
+
+    if (levelExists[0].count == 0) {
+      throw new CantCreateWithInvalidLevel();
+    }
+
     const newDeveloper = await this.knex('developer').insert(
       {
         name,
         gender,
         birthday,
-        age,
         level_id,
         hobby,
       },
-      ['id', 'name', 'gender', 'birthday', 'age', 'level_id', 'hobby'],
+      ['id', 'name', 'gender', 'birthday', 'level_id', 'hobby'],
     );
 
     return newDeveloper;
@@ -44,6 +55,9 @@ export class DeveloperService {
           'developer.*',
           'level.id as level_id',
           'level.level as level_name',
+          this.knex.raw(
+            'EXTRACT(YEAR FROM AGE(NOW(), developer.birthday)) as age',
+          ),
         )
         .from('developer')
         .leftJoin('level', 'developer.level_id', 'level.id')
