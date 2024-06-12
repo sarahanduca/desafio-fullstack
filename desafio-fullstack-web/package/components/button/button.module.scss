@@ -1,0 +1,23 @@
+.buttonContainer {
+  padding: 0.5rem 1rem;
+
+  border-radius: 10px;
+  background-color: none;
+  border: 1px solid rgb(0, 0, 0);
+
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.952);
+
+  &:hover {
+    background-color: rgb(0, 0, 0);
+    color: white;
+  }
+
+  &:active {
+    background-color: rgb(0, 0, 0);
+    color: white;
+  }
+  // .isSelected {
+  //   background-color: rgb(0, 0, 0);
+  //   color: white;
+  // }
+}
