@@ -18,8 +18,12 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:migrate": "knex migrate:up && migrate:up",
-    "db:seed": "knex seed:run --specific=levels.ts && seed:run --specific=levels.ts",
+    "db:migrate:level": "knex migrate:up 20240608020104_create_level.ts",
+    "db:migrate:developer": "knex migrate:up 20240608172259_create_developer.ts",
+    "db:migrate": "pnpm run db:migrate:level && pnpm run db:migrate:developer",
+    "db:seed:level": "knex seed:run --specific=levels.ts ",
+    "db:seed:developer": "knex seed:run --specific=developers.ts",
+    "db:seed": "pnpm run db:seed:level && pnpm run db:seed:developer",
     "db:rollback": "knex migrate:rollback"
   },
   "dependencies": {
