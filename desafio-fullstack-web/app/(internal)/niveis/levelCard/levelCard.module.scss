@@ -1,0 +1,34 @@
+.levelCardContainer {
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 6px;
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: 4px 4px 0px rgb(0, 0, 0);
+
+  padding: 1rem;
+
+  cursor: pointer;
+  user-select: none;
+
+  height: fit-content;
+  .level {
+    padding: 0;
+
+    span {
+      font-weight: 700;
+    }
+  }
+
+  .levelCardOptions {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      gap: 1rem;
+    }
+
+    padding-top: 1rem;
+  }
+}

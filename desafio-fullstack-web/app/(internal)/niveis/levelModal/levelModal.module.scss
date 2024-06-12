@@ -1,0 +1,78 @@
+@keyframes modalOpen {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 25%;
+  }
+}
+
+.levelModalContainer {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 10;
+
+  width: 25rem;
+  padding: 1rem;
+
+  border: 1px solid #000;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.952);
+  background-color: white;
+
+  animation: modalOpen 0.6s ease-in-out forwards;
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .modalForm {
+    margin: 1rem 0;
+  }
+
+  .circle {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: whiteSmoke;
+    box-shadow: 4px -40px 60px 5px rgb(26, 117, 206) inset;
+  }
+  .loader {
+    background: linear-gradient(
+      to right,
+      rgb(22, 113, 202) 50%,
+      transparent 50%
+    );
+    animation: spin 1s infinite linear;
+  }
+  .loader:before {
+    display: block;
+    content: "";
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    background: #222;
+    border-radius: 50%;
+  }
+}
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(46, 46, 46, 0.29);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(5.9px);
+  border: 1px solid rgba(46, 46, 46, 0.3);
+}
