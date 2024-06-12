@@ -22,6 +22,9 @@ const DeveloperModalContext = createContext<DeveloperModal>({
   mutate: async () => {},
   isLoading: false,
   setDeveloperId: () => {},
+  page: 1,
+  nextPage: () => {},
+  prevPage: () => {},
 });
 
 export const useDeveloperModal = () => {
@@ -35,14 +38,29 @@ export const DeveloperModalProvider: FC<{ children: ReactNode }> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [developerId, setId] = useState("");
+  const [page, setPage] = useState(1);
+
   const { data, error, isLoading, mutate } = useSWR(
-    `${process.env["NEXT_PUBLIC_API_URL"]}/developer`,
+    `${process.env["NEXT_PUBLIC_API_URL"]}/developer?page=${page}&limit=9`,
     fetcher
   );
 
   const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
   const openModal = useCallback(() => setIsOpen(true), []);
   const closeModal = useCallback(() => setIsOpen(false), []);
+
+  const nextPage = useCallback(
+    () =>
+      setPage((prevPage) => {
+        const limit = data?.meta.last_page || 1;
+        return Math.min(prevPage + 1, limit);
+      }),
+    [data?.meta.last_page]
+  );
+  const prevPage = useCallback(
+    () => setPage((prevPage) => Math.max(prevPage - 1, 1)),
+    []
+  );
 
   const setDeveloperId = useCallback((id: string) => setId(id), []);
 
@@ -54,11 +72,15 @@ export const DeveloperModalProvider: FC<{ children: ReactNode }> = ({
         closeModal,
         toggle,
         developers: data?.data || [],
+
         mutate,
         error,
         isLoading,
         developerId,
         setDeveloperId,
+        page,
+        nextPage,
+        prevPage,
       }}
     >
       {children}

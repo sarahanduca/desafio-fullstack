@@ -1,6 +1,41 @@
 .developerListContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  position: relative;
 
-  gap: 1rem;
+  .listContent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 2rem;
+  }
+
+  .pagination {
+    position: fixed;
+    bottom: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 2rem;
+
+    margin-top: 2rem;
+    width: 100%;
+
+    p {
+      background-color: #000;
+      border-radius: 25px;
+      color: #fff;
+      padding: 0.5rem;
+    }
+  }
+}
+
+.listFeedback {
+  font-size: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #757575;
 }

@@ -8,4 +8,5 @@ export interface Developer {
   hobby: string;
   birthday: string;
   level: Level;
+  level_id: string;
 }

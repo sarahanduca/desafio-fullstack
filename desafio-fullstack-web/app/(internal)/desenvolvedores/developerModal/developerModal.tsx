@@ -2,7 +2,7 @@
 
 import { FC, useCallback, useEffect, useState } from "react";
 import { useDeveloperModal } from "./developerModal.context";
-import type { Developer } from "@/package/interfaces";
+import type { Developer, Level } from "@/package/interfaces";
 
 import { Input } from "@/package/components/input";
 import { Button } from "@/package/components/button";
@@ -11,10 +11,14 @@ import { getDeveloperById } from "@/package/services/getDeveloperById";
 import { updateDeveloper } from "@/package/services/updateDeveloper";
 
 import styles from "./developerModal.module.scss";
+import { useLevelModal } from "../../niveis/levelModal";
+import { formatDate } from "@/package/utils";
+import { Select } from "@/package/components/select/select";
 
 export const DeveloperModal: FC = () => {
   const { developerId, closeModal, mutate, isOpen, isLoading } =
     useDeveloperModal();
+  const { levels } = useLevelModal();
 
   const [formValues, setFormValues] = useState<Omit<Developer, "id"> | null>(
     null
@@ -90,18 +94,34 @@ export const DeveloperModal: FC = () => {
               value={formValues?.name}
               onChange={handleInputChange}
             />
-            <Input
-              name="age"
-              label="Idade"
-              value={formValues?.age ? formValues.age.toString() : ""}
-              onChange={handleInputChange}
-            />
-            <Input
-              name="gender"
-              label="Gênero"
-              value={formValues?.gender}
-              onChange={handleInputChange}
-            />
+
+            <fieldset className={styles.radioContainer}>
+              <legend>Gênero</legend>
+              <div className={styles.radioOption}>
+                <input
+                  type="radio"
+                  id="F"
+                  name="gender"
+                  value="F"
+                  checked={formValues?.gender === "F"}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="F">Feminino</label>
+              </div>
+
+              <div className={styles.radioOption}>
+                <input
+                  type="radio"
+                  id="M"
+                  name="gender"
+                  value="M"
+                  checked={formValues?.gender === "M"}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="M">Masculino</label>
+              </div>
+            </fieldset>
+
             <Input
               name="hobby"
               label="Hobby"
@@ -111,15 +131,21 @@ export const DeveloperModal: FC = () => {
             <Input
               name="birthday"
               label="Aniversário"
-              value={formValues?.birthday}
+              value={formValues?.birthday && formatDate(formValues.birthday)}
               onChange={handleInputChange}
             />
-            <Input
-              name="level"
+            <Select
+              name="level_id"
+              value={formValues?.level_id}
+              onChange={handleInputChange as any}
               label="Nível"
-              value={formValues?.level ? formValues.level.level : ""}
-              onChange={handleInputChange}
-            />
+            >
+              {levels.map(({ id, level }: Level) => (
+                <option key={id} value={id}>
+                  {level}
+                </option>
+              ))}
+            </Select>
 
             <Button type="submit">Salvar</Button>
           </form>

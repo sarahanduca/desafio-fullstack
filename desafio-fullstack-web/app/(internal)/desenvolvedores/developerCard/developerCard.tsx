@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useCallback } from "react";
+import { FC, MouseEventHandler, useCallback } from "react";
 
 import type { Developer } from "@/package/interfaces";
 import { Button } from "@/package/components/button";
@@ -8,15 +8,24 @@ import { useDeveloperModal } from "../developerModal";
 import { formatDate } from "@/package/utils/formatDate";
 
 import styles from "./developerCard.module.scss";
+import { deleteDeveloper } from "@/package/services";
 
 export const DeveloperCard: FC<{ developer: Developer }> = ({ developer }) => {
   const { id, name, gender, birthday, age, hobby, level } = developer;
-  const { toggle, closeModal, setDeveloperId } = useDeveloperModal();
+  const { openModal, setDeveloperId } = useDeveloperModal();
 
-  const handleEditDeveloper = useCallback(() => {
-    setDeveloperId(id);
-    toggle();
-  }, [id, setDeveloperId, toggle]);
+  const handleEditDeveloper = useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      setDeveloperId(id);
+      openModal();
+    },
+    [id, setDeveloperId, openModal]
+  );
+
+  const handleDeleteDeveloper = useCallback(async () => {
+    await deleteDeveloper(id);
+  }, [id]);
 
   return (
     <div className={styles.developerCardContainer}>
@@ -43,7 +52,7 @@ export const DeveloperCard: FC<{ developer: Developer }> = ({ developer }) => {
 
       <div className={styles.developerCardButtons}>
         <Button onClick={handleEditDeveloper}> 🖋 Editar </Button>
-        <Button>❌ Excluir</Button>
+        <Button onClick={handleDeleteDeveloper}>❌ Excluir</Button>
       </div>
     </div>
   );

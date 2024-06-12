@@ -12,4 +12,7 @@ export interface DeveloperModal {
   error?: Error;
   isLoading: boolean;
   setDeveloperId: (id: string) => void;
+  page: number;
+  nextPage: () => void;
+  prevPage: () => void;
 }

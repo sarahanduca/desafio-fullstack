@@ -1,0 +1,19 @@
+.selectContainer {
+  display: flex;
+  flex-direction: column;
+
+  margin: 1rem 0;
+
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 6px;
+  padding: 0.8rem;
+
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  cursor: pointer;
+
+  option {
+    background-color: #fff;
+    color: #000;
+  }
+}
