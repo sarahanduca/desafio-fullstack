@@ -57,17 +57,78 @@ Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação
   /levels/:id
   ```
 
-  Retorna o novo nível editado
+  Retorna o novo nível editado.
 
 * DELETE
   ```
   /levels/:id
   ```
-  Deleta o nível selecionado, se não houver desenvolvedores associados
+  Deleta o nível selecionado, se não houver desenvolvedores associados.
+* GET
+  ```
+    /levels/:id
+  ```
+  Retorna o nível do ID correspondente.
+  * GET
+  ```
+    /levels/:id/developers
+  ```
+  Retorna todos os desenvolvedores associados aquele nível.
+
+### Desenvolvedor
+
+  - GET
+  
+    ```
+    /developers?page=1&limit=10
+    ```
+    
+    Retorna todos os desenvolvedores do BD, com o a estrutura.
+    
+    ```
+    {
+      id: number,
+      name: string,
+      gender: string,
+      birthday: Date,
+      age: number,
+      hobby: string,
+      level: {
+        id: number,
+        level: string
+      }
+    }
+    ```
+  
+  * POST
+    ```
+    /developers
+    ```
+    Retorna o desenvolvedor que foi criado.
+  
+  * PATCH
+  
+    ```
+    /developers/:id
+    ```
+    
+    Retorna o novo desenvolvedor editado.
+  
+  * DELETE
+    ```
+    /developers/:id
+    ```
+    Deleta o desenvolvedor selecionado.
+  
+  * GET
+    ```
+    /developers/:id
+    ```
+    Retorna o desenvolvedor do ID correspondente.
 
 ## Frontend
 
 ### Tecnologias utilizadas
 
 ![Nextjs](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white) e [SWR](https://swr.vercel.app/) para o fetch de dados no client-side.
