@@ -25,6 +25,12 @@ const DeveloperModalContext = createContext<DeveloperModal>({
   page: 1,
   nextPage: () => {},
   prevPage: () => {},
+  meta: {
+    total: 0,
+    per_page: 0,
+    current_page: 0,
+    last_page: 0,
+  },
 });
 
 export const useDeveloperModal = () => {
@@ -41,11 +47,9 @@ export const DeveloperModalProvider: FC<{ children: ReactNode }> = ({
   const [page, setPage] = useState(1);
 
   const { data, error, isLoading, mutate } = useSWR(
-    `${process.env["NEXT_PUBLIC_API_URL"]}/developers?page=${page}&limit=9`,
+    `${process.env["NEXT_PUBLIC_API_URL"]}/developers?page=${page}`,
     fetcher
   );
-
-  console.log();
 
   const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
   const openModal = useCallback(() => setIsOpen(true), []);
@@ -73,6 +77,7 @@ export const DeveloperModalProvider: FC<{ children: ReactNode }> = ({
         closeModal,
         toggle,
         developers: data?.data || [],
+        meta: data?.meta || {},
         mutate,
         error,
         isLoading,

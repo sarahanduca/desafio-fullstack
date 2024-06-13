@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useDeveloperModal } from "./developerModal.context";
 import InputMask from "react-input-mask";
 import moment from "moment";
@@ -18,13 +18,21 @@ import { Select } from "@/package/components/select/select";
 import styles from "./developerModal.module.scss";
 
 export const DeveloperModal: FC = () => {
-  const { developerId, closeModal, mutate, isOpen, isLoading } =
-    useDeveloperModal();
+  const { developerId, closeModal, mutate, isOpen } = useDeveloperModal();
   const { levels } = useLevelModal();
-
-  const [formValues, setFormValues] = useState<Omit<Developer, "id"> | null>(
-    null
+  const formInitialValues = useMemo(
+    () => ({
+      name: "",
+      hobby: "",
+      birthday: "",
+      level_id: "",
+      gender: "",
+    }),
+    []
   );
+  const [formValues, setFormValues] =
+    useState<Omit<Developer, "id">>(formInitialValues);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (developerId) {
@@ -35,16 +43,16 @@ export const DeveloperModal: FC = () => {
           setFormValues(developer);
         }
       };
-
+      setIsLoading(true);
       fetchDeveloper();
+      setIsLoading(false);
     }
   }, [developerId]);
 
   const onClickOutside = useCallback(() => {
-    setFormValues(null);
-
+    setFormValues(formInitialValues);
     closeModal();
-  }, [closeModal]);
+  }, [closeModal, formInitialValues]);
 
   useEffect(() => {
     if (isOpen) {
@@ -68,22 +76,25 @@ export const DeveloperModal: FC = () => {
   const handleSubmit = useCallback(
     async (e: { preventDefault: () => void }) => {
       e.preventDefault();
-      const formattedDate = moment(formValues?.birthday, "DD/MM/YYYY").format(
-        "YYYY-MM-DD"
-      );
-      console.log("date", formValues?.birthday);
+      setIsLoading(true);
+      // const formattedDate = moment(formValues?.birthday, "DD/MM/YYYY").format(
+      //   "YYYY-MM-DD"
+      // );
 
-      setFormValues((prev) => ({ ...prev!, birthday: formattedDate }));
+      // setFormValues((prev) => ({ ...prev!, birthday: formattedDate }));
       // const updatedFormValues = { ...formValues, birthday: formattedDate };
-
-      console.log("formValues", formValues);
-      if (formValues)
+      try {
         developerId
           ? await updateDeveloper(developerId, formValues)
           : await createDeveloper(formValues);
 
-      mutate();
-      closeModal();
+        mutate();
+        setIsLoading(false);
+        closeModal();
+      } catch (error) {
+        window.alert(error);
+        setIsLoading(false);
+      }
     },
     [closeModal, formValues, developerId, mutate]
   );
@@ -104,9 +115,14 @@ export const DeveloperModal: FC = () => {
               label="Nome"
               value={formValues?.name}
               onChange={handleInputChange}
+              disabled={isLoading}
             />
 
-            <fieldset className={styles.radioContainer}>
+            <fieldset
+              className={`${styles.radioContainer} ${
+                isLoading ? styles.disabledRadio : null
+              }`}
+            >
               <legend>Gênero</legend>
               <div className={styles.radioOption}>
                 <input
@@ -116,6 +132,7 @@ export const DeveloperModal: FC = () => {
                   value="F"
                   checked={formValues?.gender === "F"}
                   onChange={handleInputChange}
+                  disabled={isLoading}
                 />
                 <label htmlFor="F">Feminino</label>
               </div>
@@ -128,6 +145,7 @@ export const DeveloperModal: FC = () => {
                   value="M"
                   checked={formValues?.gender === "M"}
                   onChange={handleInputChange}
+                  disabled={isLoading}
                 />
                 <label htmlFor="M">Masculino</label>
               </div>
@@ -138,13 +156,15 @@ export const DeveloperModal: FC = () => {
               label="Hobby"
               value={formValues?.hobby}
               onChange={handleInputChange}
+              disabled={isLoading}
             />
 
             <Input
               name="birthday"
               label="Aniversário"
-              value={formValues?.birthday && formatDate(formValues.birthday)}
+              value={formValues.birthday && formatDate(formValues.birthday)}
               onChange={handleInputChange}
+              disabled={isLoading}
             />
             {/* <InputMask
               mask="99/99/9999"
@@ -160,6 +180,7 @@ export const DeveloperModal: FC = () => {
               value={formValues?.level_id}
               onChange={handleInputChange as any}
               label="Nível"
+              disabled={isLoading}
             >
               {levels.map(({ id, level }: Level) => (
                 <option key={id} value={id}>
@@ -168,7 +189,9 @@ export const DeveloperModal: FC = () => {
               ))}
             </Select>
 
-            <Button type="submit">Salvar</Button>
+            <Button disabled={isLoading} type="submit">
+              {isLoading ? "Enviando" : "Salvar"}
+            </Button>
           </form>
         </div>
       </div>

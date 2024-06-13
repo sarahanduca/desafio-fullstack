@@ -58,6 +58,19 @@
       }
     }
   }
+
+  .disabledRadio {
+    color: #a0a0a0;
+
+    .radioOption {
+      color: #a0a0a0;
+
+      input,
+      label {
+        cursor: default;
+      }
+    }
+  }
 }
 
 .modalBackground {

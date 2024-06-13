@@ -4,10 +4,11 @@ import { useDeveloperModal } from "../developerModal";
 
 import styles from "./developerList.module.scss";
 import { DeveloperCard } from "../developerCard";
+import { Paginate } from "@/package/components/paginate";
+import { DeveloperFromBD } from "@/package/interfaces";
 
 export const DeveloperList: FC = () => {
-  const { isLoading, error, developers, prevPage, nextPage, page } =
-    useDeveloperModal();
+  const { isLoading, error, developers } = useDeveloperModal();
 
   if (isLoading) {
     return <div className={styles.listFeedback}>Carregando...</div>;
@@ -22,13 +23,15 @@ export const DeveloperList: FC = () => {
       <div className={styles.developerListContainer}>
         <div className={styles.listContent}>
           {developers.map((developer) => (
-            <DeveloperCard key={developer.id} developer={developer} />
+            <DeveloperCard
+              key={developer.id}
+              developer={developer as DeveloperFromBD}
+            />
           ))}
         </div>
+
         <div className={styles.pagination}>
-          <button onClick={() => prevPage()}>◀</button>
-          <p>{page}</p>
-          <button onClick={() => nextPage()}>▶</button>
+          <Paginate type="developer" />
         </div>
       </div>
     );

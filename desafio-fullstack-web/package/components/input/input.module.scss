@@ -14,3 +14,16 @@
     font-weight: 700;
   }
 }
+
+.inputDisabled {
+  label {
+    color: #a0a0a0;
+  }
+  input {
+    background-color: #f5f5f5;
+    color: #a0a0a0;
+    border: 1px solid #a0a0a0;
+
+    cursor: default;
+  }
+}

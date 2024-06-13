@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useLevelModal } from "./levelModal.context";
 
 import styles from "./levelModal.module.scss";
@@ -12,8 +12,11 @@ import { getLevelById } from "@/package/services/getLevelById";
 import { updateLevel } from "@/package/services/updateLevel";
 
 export const LevelModal: FC = () => {
-  const { levelId, closeModal, mutate, isOpen, isLoading } = useLevelModal();
-  const [formValues, setFormValues] = useState<Omit<Level, "id"> | null>(null);
+  const { levelId, closeModal, mutate, isOpen } = useLevelModal();
+  const formInitialValues = useMemo(() => ({ level: "" }), []);
+  const [formValues, setFormValues] =
+    useState<Omit<Level, "id">>(formInitialValues);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (levelId) {
@@ -25,15 +28,17 @@ export const LevelModal: FC = () => {
         }
       };
 
+      setIsLoading(true);
       fetchLevel();
+      setIsLoading(false);
     }
   }, [levelId]);
 
   const onClickOutside = useCallback(() => {
-    setFormValues({ level: "" });
+    setFormValues(formInitialValues);
 
     closeModal();
-  }, [closeModal]);
+  }, [closeModal, formInitialValues]);
 
   useEffect(() => {
     if (isOpen) {
@@ -57,12 +62,14 @@ export const LevelModal: FC = () => {
   const handleSubmit = useCallback(
     async (e: { preventDefault: () => void }) => {
       e.preventDefault();
+      setIsLoading(true);
       if (formValues)
         levelId
           ? await updateLevel(levelId, formValues)
           : await createLevel(formValues);
 
       mutate();
+      setIsLoading(false);
       closeModal();
     },
     [closeModal, formValues, levelId, mutate]
@@ -82,8 +89,11 @@ export const LevelModal: FC = () => {
               label="Nível"
               value={formValues?.level}
               onChange={handleInputChange}
+              disabled={isLoading}
             />
-            <Button type="submit">Salvar</Button>
+            <Button disabled={isLoading} type="submit">
+              {isLoading ? "Enviando" : "Salvar"}
+            </Button>
           </form>
         </div>
       </div>

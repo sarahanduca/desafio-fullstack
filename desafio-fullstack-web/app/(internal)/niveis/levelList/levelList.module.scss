@@ -1,7 +1,23 @@
 .levelList {
+  position: relative;
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
   gap: 1rem;
+}
+
+.pagination {
+  position: fixed;
+  bottom: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 2rem;
+
+  margin-top: 2rem;
+  width: 100%;
 }
 
 @media screen and (max-width: 728px) {

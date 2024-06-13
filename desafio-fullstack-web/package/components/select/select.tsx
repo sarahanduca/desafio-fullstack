@@ -8,10 +8,21 @@ export const Select: FC<{
   value?: string;
   onChange?: () => void;
   label: string;
-}> = ({ children, name, value, onChange, label }) => {
+  disabled?: boolean;
+}> = ({ children, name, value, onChange, label, disabled }) => {
   return (
-    <div className={styles.selectContainer}>
-      <select name={name} id={name} value={value} onChange={onChange}>
+    <div
+      className={`${styles.selectContainer} ${
+        disabled ? styles.isDisabled : null
+      }`}
+    >
+      <select
+        name={name}
+        id={name}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+      >
         <option>{label}</option>
         {children}
       </select>

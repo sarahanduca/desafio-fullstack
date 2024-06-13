@@ -1,0 +1,13 @@
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+
+  gap: 1rem;
+
+  p {
+    background-color: #000;
+    border-radius: 25px;
+    color: #fff;
+    padding: 0.5rem;
+  }
+}

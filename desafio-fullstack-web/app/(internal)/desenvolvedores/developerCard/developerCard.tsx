@@ -2,7 +2,7 @@
 
 import { FC, MouseEventHandler, useCallback } from "react";
 
-import type { Developer } from "@/package/interfaces";
+import type { DeveloperFromBD as Developer } from "@/package/interfaces";
 import { Button } from "@/package/components/button";
 import { useDeveloperModal } from "../developerModal";
 import { formatDate } from "@/package/utils/formatDate";

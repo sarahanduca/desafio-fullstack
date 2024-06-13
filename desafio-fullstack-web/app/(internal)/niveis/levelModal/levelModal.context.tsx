@@ -22,6 +22,15 @@ const LevelModalContext = createContext<LevelModal>({
   mutate: async () => {},
   isLoading: false,
   setLevelId: () => {},
+  page: 1,
+  nextPage: () => {},
+  prevPage: () => {},
+  meta: {
+    total: 0,
+    per_page: 0,
+    current_page: 0,
+    last_page: 0,
+  },
 });
 
 export const useLevelModal = () => {
@@ -35,14 +44,26 @@ export const LevelModalProvider: FC<{ children: ReactNode }> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [levelId, setId] = useState("");
+  const [page, setPage] = useState(1);
   const { data, error, isLoading, mutate } = useSWR(
-    `${process.env["NEXT_PUBLIC_API_URL"]}/levels`,
+    `${process.env["NEXT_PUBLIC_API_URL"]}/levels?page=${page}`,
     fetcher
   );
 
   const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
   const openModal = useCallback(() => setIsOpen(true), []);
   const closeModal = useCallback(() => setIsOpen(false), []);
+  const nextPage = useCallback(
+    () =>
+      setPage((prevPage) => {
+        return prevPage + 1;
+      }),
+    []
+  );
+  const prevPage = useCallback(
+    () => setPage((prevPage) => Math.max(prevPage - 1, 1)),
+    []
+  );
 
   const setLevelId = useCallback((id: string) => setId(id), []);
 
@@ -54,6 +75,10 @@ export const LevelModalProvider: FC<{ children: ReactNode }> = ({
         closeModal,
         toggle,
         levels: data?.data || [],
+        meta: data?.meta || {},
+        page,
+        nextPage,
+        prevPage,
         mutate,
         error,
         isLoading,

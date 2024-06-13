@@ -6,9 +6,17 @@ export const Button: FC<{
   children: string;
   onClick?: MouseEventHandler;
   type?: "button" | "submit" | "reset" | undefined;
-}> = ({ children, onClick, type }) => {
+  disabled?: boolean;
+}> = ({ children, onClick, type, disabled }) => {
   return (
-    <button className={styles.buttonContainer} onClick={onClick} type={type}>
+    <button
+      className={`${styles.buttonContainer} ${
+        disabled ? styles.isDisabled : null
+      }`}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
