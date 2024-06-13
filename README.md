@@ -203,7 +203,3 @@ Retorna o desenvolvedor do ID correspondente.
 
 ![Nextjs](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white) e [SWR](https://swr.vercel.app/) para o fetch de dados no client-side.
-
-```
-
-```
