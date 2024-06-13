@@ -6,12 +6,12 @@ export interface LevelModal {
   openModal: () => void;
   closeModal: () => void;
   toggle: () => void;
-  levelId?: string;
+  levelId?: string | null;
   levels: Level[];
   mutate: KeyedMutator<any>;
   error?: Error;
   isLoading: boolean;
-  setLevelId: (id: string) => void;
+  setLevelId: (id: string | null) => void;
   meta: Meta;
   page: number;
   nextPage: () => void;

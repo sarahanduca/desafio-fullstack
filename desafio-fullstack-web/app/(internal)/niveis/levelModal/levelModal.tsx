@@ -63,14 +63,19 @@ export const LevelModal: FC = () => {
     async (e: { preventDefault: () => void }) => {
       e.preventDefault();
       setIsLoading(true);
-      if (formValues)
-        levelId
-          ? await updateLevel(levelId, formValues)
-          : await createLevel(formValues);
+      try {
+        if (formValues)
+          levelId
+            ? await updateLevel(levelId, formValues)
+            : await createLevel(formValues);
 
-      mutate();
-      setIsLoading(false);
-      closeModal();
+        mutate();
+        setIsLoading(false);
+        closeModal();
+      } catch (error) {
+        window.alert(error);
+        setIsLoading(false);
+      }
     },
     [closeModal, formValues, levelId, mutate]
   );

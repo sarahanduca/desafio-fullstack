@@ -6,8 +6,6 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --blue: rgb(0, 141, 207);
-  --purble: rgb(61, 63, 149);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,15 +14,6 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
-
-body {
-  /* height: 100vh;
-  filter: contrast(170%) brightness(1000%);
-  color: rgb(var(--foreground-rgb));
-  background: rgb(202, 166, 125);
-  background: linear-gradient(0deg, rgb(202, 166, 125), rgba(0, 0, 0, 0)),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 333 333' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); */
 }
 
 @layer utilities {

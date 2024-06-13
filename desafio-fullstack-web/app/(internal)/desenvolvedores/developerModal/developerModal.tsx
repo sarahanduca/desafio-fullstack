@@ -2,8 +2,7 @@
 
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useDeveloperModal } from "./developerModal.context";
-import InputMask from "react-input-mask";
-import moment from "moment";
+
 import type { Developer, Level } from "@/package/interfaces";
 
 import { Input } from "@/package/components/input";
@@ -12,10 +11,10 @@ import { createDeveloper } from "@/package/services/createDeveloper";
 import { getDeveloperById } from "@/package/services/getDeveloperById";
 import { updateDeveloper } from "@/package/services/updateDeveloper";
 import { useLevelModal } from "../../niveis/levelModal";
-import { formatDate } from "@/package/utils";
 import { Select } from "@/package/components/select/select";
 
 import styles from "./developerModal.module.scss";
+import { formatDate } from "@/package/utils";
 
 export const DeveloperModal: FC = () => {
   const { developerId, closeModal, mutate, isOpen } = useDeveloperModal();
@@ -77,13 +76,8 @@ export const DeveloperModal: FC = () => {
     async (e: { preventDefault: () => void }) => {
       e.preventDefault();
       setIsLoading(true);
-      // const formattedDate = moment(formValues?.birthday, "DD/MM/YYYY").format(
-      //   "YYYY-MM-DD"
-      // );
-
-      // setFormValues((prev) => ({ ...prev!, birthday: formattedDate }));
-      // const updatedFormValues = { ...formValues, birthday: formattedDate };
       try {
+        formValues.birthday = new Date(formValues.birthday).toISOString();
         developerId
           ? await updateDeveloper(developerId, formValues)
           : await createDeveloper(formValues);
@@ -162,19 +156,13 @@ export const DeveloperModal: FC = () => {
             <Input
               name="birthday"
               label="Aniversário"
-              value={formValues.birthday && formatDate(formValues.birthday)}
+              type="date"
+              value={formValues?.birthday.split("T")[0]}
+              placeholder="dd/mm/aaaa"
               onChange={handleInputChange}
               disabled={isLoading}
             />
-            {/* <InputMask
-              mask="99/99/9999"
-              value={formValues?.birthday && formatDate(formValues.birthday)}
-              onChange={handleInputChange}
-            >
-              {(inputProps: {}) => (
-                <Input {...inputProps} name="birthday" label="Aniversário" />
-              )}
-            </InputMask> */}
+
             <Select
               name="level_id"
               value={formValues?.level_id}

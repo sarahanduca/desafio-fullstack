@@ -24,7 +24,7 @@ export const LevelList: FC = () => {
   }
 
   return (
-    <>
+    <div className={styles.levelListContainer}>
       <div className={styles.levelList}>
         {levels.map(({ id, level }: Level) => {
           return (
@@ -37,11 +37,10 @@ export const LevelList: FC = () => {
             />
           );
         })}
-
-        <div className={styles.pagination}>
-          <Paginate type="level" />
-        </div>
       </div>
-    </>
+      <div className={styles.pagination}>
+        <Paginate type="level" />
+      </div>
+    </div>
   );
 };

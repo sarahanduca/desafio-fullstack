@@ -1,6 +1,10 @@
 .developerListContainer {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
+  height: 50vh;
+  margin-bottom: 2rem;
   .listContent {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
@@ -9,9 +13,6 @@
   }
 
   .pagination {
-    position: fixed;
-    bottom: 100px;
-
     display: flex;
     justify-content: center;
     align-items: center;

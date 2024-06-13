@@ -37,8 +37,12 @@ export const LevelCard: FC<
   const handleDeleteLevel = useCallback<MouseEventHandler<HTMLElement>>(
     async (e) => {
       e.stopPropagation();
-      await deleteLevel(id);
-      mutate();
+      try {
+        await deleteLevel(id);
+        mutate();
+      } catch (error) {
+        window.alert(error);
+      }
     },
     [id, mutate]
   );
@@ -48,8 +52,12 @@ export const LevelCard: FC<
   >(
     async (e) => {
       e.stopPropagation();
-      const developersAssociated = await getDevelopersByLevel(id);
-      setDevelopers(developersAssociated);
+      try {
+        const developersAssociated = await getDevelopersByLevel(id);
+        setDevelopers(developersAssociated);
+      } catch (error) {
+        window.alert(error);
+      }
     },
     [id]
   );

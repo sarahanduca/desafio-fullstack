@@ -43,7 +43,7 @@ export const LevelModalProvider: FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [levelId, setId] = useState("");
+  const [levelId, setId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const { data, error, isLoading, mutate } = useSWR(
     `${process.env["NEXT_PUBLIC_API_URL"]}/levels?page=${page}`,
@@ -65,7 +65,7 @@ export const LevelModalProvider: FC<{ children: ReactNode }> = ({
     []
   );
 
-  const setLevelId = useCallback((id: string) => setId(id), []);
+  const setLevelId = useCallback((id: string | null) => setId(id), []);
 
   return (
     <LevelModalContext.Provider

@@ -8,8 +8,17 @@ export const Input: FC<{
   label: string;
   placeholder?: string;
   disabled?: boolean;
+  type?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}> = ({ value, name, label, onChange, placeholder, disabled, ...props }) => {
+}> = ({
+  value,
+  name,
+  label,
+  onChange,
+  placeholder,
+  disabled,
+  type = "text",
+}) => {
   return (
     <div
       className={`${styles.inputContainer} ${
@@ -18,13 +27,14 @@ export const Input: FC<{
     >
       <label htmlFor={name}>{label}</label>
       <input
-        type="text"
+        type={type}
         value={value}
         name={name}
         onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
-        {...props}
+        required
+        data-date-format={type == "date" ? "DD MMMM YYYY" : null}
       />
     </div>
   );

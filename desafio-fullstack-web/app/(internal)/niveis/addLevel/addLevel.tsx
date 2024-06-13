@@ -10,7 +10,7 @@ export const AddLevel = () => {
     <Button
       onClick={(e) => {
         e.stopPropagation();
-        setLevelId("");
+        setLevelId(null);
         openModal();
       }}
     >
