@@ -6,7 +6,19 @@
 
 ### Localmente
 
-Após feito o clone do repositório, é necessário instalar as dependencias, execute o comando `pnpm install`. Com as dependências em ordem é necessário configurar o banco de dados. Dentro da pasta "desafio-fullstack-api" confirme primeiro se a variavél `POSTGRES_HOST` no arquivo .env está como "localhost", este deve ser seu valor, e então execute o comando `docker compose up postgres`. Com o docker em execução, utilize o comando `pnpm db:migrate` para executar as migrations, e após a execução, `pnpm db:seed` opicionalmente para o caso de seed do BD.
+Após feito o clone do repositório, é necessário instalar as dependencias, execute o comando `pnpm install`. Com as dependências em ordem é necessário configurar o banco de dados. Dentro da pasta "desafio-fullstack-api" confirme primeiro se a variavél `POSTGRES_HOST` no arquivo .env está como "localhost". Os valores da .env devem ser:
+
+```
+API_PORT=8080
+
+POSTGRES_HOST="postgres"
+POSTGRES_PORT="5432"
+POSTGRES_USER="postgres"
+POSTGRES_PASSWORD="desafio"
+POSTGRES_DB="desafiofullstack"
+```
+
+Então execute o comando `docker compose up postgres`. Com o docker em execução, utilize o comando `pnpm db:migrate` para executar as migrations, e após a execução, `pnpm db:seed` opicionalmente para o caso de seed do BD.
 
 Agora o banco de dados está configurado e basta executar o serviço da API (que foi setado para ouvir na porta 8080). Sendo assim, execute o comando `pnpm start`.
 
