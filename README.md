@@ -18,7 +18,7 @@ Ao final sua aplicação deve estar rodando normalmente na porta 3000.
 
 ![](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 
-Deve ser feito a mesma etapa anterior para a configuração do banco de dados, após isso, mudar o valor da variavel `POSTGRES_HOST` para "postgres", sendo assim, o networking do docker pode comunicar entre as aplicações.
+Deve ser feito a mesma etapa anterior para a configuração do banco de dados, após isso, mudar o valor da variavel `POSTGRES_HOST` para "postgres", sendo assim, o network do docker pode comunicar entre as aplicações.
 
 Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação, desafio-fullstack.
 
@@ -28,7 +28,7 @@ Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação
 
 ![NestJs](https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white) ![](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) [Knex.js](https://knexjs.org/) como query builder.
 
-<!-- ### Nivel
+### Nivel
 
 - GET
 
@@ -63,7 +63,7 @@ Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação
   ```
   /levels/:id
   ```
-  Deleta o nível selecionado, se não houver desenvolvedores associados -->
+  Deleta o nível selecionado, se não houver desenvolvedores associados
 
 ## Frontend
 
