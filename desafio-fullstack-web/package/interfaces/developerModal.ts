@@ -1,5 +1,5 @@
 import { KeyedMutator } from "swr";
-import { Developer } from ".";
+import { Developer, Meta } from ".";
 
 export interface DeveloperModal {
   isOpen: boolean;
@@ -15,4 +15,5 @@ export interface DeveloperModal {
   page: number;
   nextPage: () => void;
   prevPage: () => void;
+  meta: Meta;
 }

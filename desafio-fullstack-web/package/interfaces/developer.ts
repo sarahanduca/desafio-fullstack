@@ -6,6 +6,5 @@ export interface Developer {
   gender: string;
   hobby: string;
   birthday: string;
-  level: Level;
   level_id: string;
 }

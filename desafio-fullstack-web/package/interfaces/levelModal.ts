@@ -1,5 +1,5 @@
 import { KeyedMutator } from "swr";
-import { Level } from ".";
+import { Level, Meta } from ".";
 
 export interface LevelModal {
   isOpen: boolean;
@@ -12,4 +12,8 @@ export interface LevelModal {
   error?: Error;
   isLoading: boolean;
   setLevelId: (id: string) => void;
+  meta: Meta;
+  page: number;
+  nextPage: () => void;
+  prevPage: () => void;
 }
