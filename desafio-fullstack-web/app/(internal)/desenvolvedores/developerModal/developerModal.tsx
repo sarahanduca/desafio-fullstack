@@ -73,14 +73,14 @@ export const DeveloperModal: FC = () => {
       );
       console.log("date", formValues?.birthday);
 
-      // setFormValues((prev) => ({ ...prev!, birthday: formattedDate }));
-      const updatedFormValues = { ...formValues, birthday: formattedDate };
+      setFormValues((prev) => ({ ...prev!, birthday: formattedDate }));
+      // const updatedFormValues = { ...formValues, birthday: formattedDate };
 
       console.log("formValues", formValues);
       if (formValues)
         developerId
-          ? await updateDeveloper(developerId, updatedFormValues)
-          : await createDeveloper(updatedFormValues);
+          ? await updateDeveloper(developerId, formValues)
+          : await createDeveloper(formValues);
 
       mutate();
       closeModal();
@@ -140,7 +140,13 @@ export const DeveloperModal: FC = () => {
               onChange={handleInputChange}
             />
 
-            <InputMask
+            <Input
+              name="birthday"
+              label="Aniversário"
+              value={formValues?.birthday && formatDate(formValues.birthday)}
+              onChange={handleInputChange}
+            />
+            {/* <InputMask
               mask="99/99/9999"
               value={formValues?.birthday && formatDate(formValues.birthday)}
               onChange={handleInputChange}
@@ -148,7 +154,7 @@ export const DeveloperModal: FC = () => {
               {(inputProps: {}) => (
                 <Input {...inputProps} name="birthday" label="Aniversário" />
               )}
-            </InputMask>
+            </InputMask> */}
             <Select
               name="level_id"
               value={formValues?.level_id}

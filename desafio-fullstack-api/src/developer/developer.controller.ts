@@ -14,7 +14,7 @@ import { DeveloperService } from './developer.service';
 import { CreateDeveloperDto } from './dto/create-developer.dto';
 import { UpdateDeveloperDto } from './dto/update-developer.dto';
 
-@Controller('developer')
+@Controller('developers')
 export class DeveloperController {
   constructor(private readonly developerService: DeveloperService) {}
 

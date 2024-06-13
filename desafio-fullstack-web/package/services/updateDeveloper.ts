@@ -5,7 +5,7 @@ export const updateDeveloper = async (
   developer: Omit<Developer, "id">
 ) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/developer/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/developers/${id}`,
     {
       method: "PATCH",
       headers: {

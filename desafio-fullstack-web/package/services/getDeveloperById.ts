@@ -1,6 +1,6 @@
 export const getDeveloperById = async (id: string) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/developer/${id}`
+    `${process.env.NEXT_PUBLIC_API_URL}/developers/${id}`
   );
 
   if (!response.ok) {
