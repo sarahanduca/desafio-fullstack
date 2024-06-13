@@ -10,7 +10,7 @@ Após feito o clone do repositório, é necessário instalar as dependencias, ex
 
 Agora o banco de dados está configurado e basta executar o serviço da API (que foi setado para ouvir na porta 8080). Sendo assim, execute o comando `pnpm start`.
 
-É necessário esar dentro do respectivo diretório para a execussão do comando, portanto, para rodar o frontend da aplicação deve-se estra na pasta "desafio-fullstack-web" e executar o comando `pnpm run dev`.
+É necessário esar dentro do respectivo diretório para a execussão do comando, portanto, para rodar o frontend da aplicação deve-se estra na pasta "desafio-fullstack-web" e executar o comando `pnpm dev`.
 
 Ao final sua aplicação deve estar rodando normalmente na porta 3000.
 
@@ -28,7 +28,7 @@ Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação
 
 ![NestJs](https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white) ![](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) [Knex.js](https://knexjs.org/) como query builder.
 
-### Nivel
+<!-- ### Nivel
 
 - GET
 
@@ -63,7 +63,7 @@ Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação
   ```
   /levels/:id
   ```
-  Deleta o nível selecionado, se não houver desenvolvedores associados
+  Deleta o nível selecionado, se não houver desenvolvedores associados -->
 
 ## Frontend
 
