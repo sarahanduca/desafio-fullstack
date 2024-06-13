@@ -34,13 +34,13 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  migrate:
-    build: ./desafio-fullstack-api/
-    command: pnpm db:migrate
-    volumes:
-      - .:/user/src/app
-    depends_on:
-      - postgres
+  # migrate:
+  #   build: ./desafio-fullstack-api/
+  #   command: pnpm db:migrate
+  #   networks:
+  #     - bd-network
+  #   depends_on:
+  #     - postgres
 
   web:
     env_file:
