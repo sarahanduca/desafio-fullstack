@@ -16,4 +16,5 @@ FROM base
 COPY --from=prod-deps /user/src/app/node_modules /user/src/app/node_modules
 COPY --from=build /user/src/app/dist /user/src/app/dist
 EXPOSE 8080
+
 CMD [ "node", "dist/src/main.js" ]

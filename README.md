@@ -18,7 +18,7 @@ Ao final sua aplicação deve estar rodando normalmente na porta 3000.
 
 ![](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 
-Deve ser feito a mesma etapa anterior para a configuração do banco de dados, após isso, mudar o valor da variavel `POSTGRES_HOST` para "postgres", sendo assim, o network do docker pode comunicar entre as aplicações.
+Primeiramente verificar se a variavel `POSTGRES_HOST` está como "postgres", sendo assim, o network do docker pode se comunicar entre as aplicações.
 
 Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação, desafio-fullstack.
 
@@ -69,7 +69,7 @@ Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação
     /levels/:id
   ```
   Retorna o nível do ID correspondente.
-  * GET
+  - GET
   ```
     /levels/:id/developers
   ```
@@ -77,54 +77,58 @@ Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação
 
 ### Desenvolvedor
 
-  - GET
-  
-    ```
-    /developers?page=1&limit=10
-    ```
-    
-    Retorna todos os desenvolvedores do BD, com o a estrutura.
-    
-    ```
-    {
+- GET
+
+  ```
+  /developers?page=1&limit=10
+  ```
+
+  Retorna todos os desenvolvedores do BD, com o a estrutura.
+
+  ```
+  {
+    id: number,
+    name: string,
+    gender: string,
+    birthday: Date,
+    age: number,
+    hobby: string,
+    level: {
       id: number,
-      name: string,
-      gender: string,
-      birthday: Date,
-      age: number,
-      hobby: string,
-      level: {
-        id: number,
-        level: string
-      }
+      level: string
     }
-    ```
-  
-  * POST
-    ```
-    /developers
-    ```
-    Retorna o desenvolvedor que foi criado.
-  
-  * PATCH
-  
-    ```
-    /developers/:id
-    ```
-    
-    Retorna o novo desenvolvedor editado.
-  
-  * DELETE
-    ```
-    /developers/:id
-    ```
-    Deleta o desenvolvedor selecionado.
-  
-  * GET
-    ```
-    /developers/:id
-    ```
-    Retorna o desenvolvedor do ID correspondente.
+  }
+  ```
+
+* POST
+
+  ```
+  /developers
+  ```
+
+  Retorna o desenvolvedor que foi criado.
+
+* PATCH
+
+  ```
+  /developers/:id
+  ```
+
+  Retorna o novo desenvolvedor editado.
+
+* DELETE
+
+  ```
+  /developers/:id
+  ```
+
+  Deleta o desenvolvedor selecionado.
+
+* GET
+  ```
+  /developers/:id
+  ```
+  Retorna o desenvolvedor do ID correspondente.
 
 ## Frontend
 
