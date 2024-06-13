@@ -21,23 +21,4 @@ module.exports = {
       directory: './scripts/seeds',
     },
   },
-
-  // production: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: process.env.POSTGRES_DB,
-  //     user: process.env.POSTGRES_USER,
-  //     port: parseInt(process.env.POSTGRES_PORT || ''),
-  //     password: process.env.POSTGRES_PASSWORD,
-  //     host: process.env.POSTGRES_HOST,
-  //   },
-  //   migrations: {
-  //     tableName: 'migrations',
-  //     directory: './scripts/migrations',
-  //     extension: 'ts',
-  //   },
-  //   seeds: {
-  //     directory: './scripts/seeds',
-  //   },
-  // },
 };
