@@ -9,12 +9,12 @@
 
 ### Localmente
 
-Após feito o clone do repositório, é necessário instalar as dependencias, execute o comando `pnpm install` nos diretório de API e Web. Dentro da pasta "desafio-fullstack-api" confirme primeiro se a variavél `POSTGRES_HOST` no arquivo .env está como "localhost". Os valores da .env devem ser:
+Após feito o clone do repositório, é necessário instalar as dependencias, execute o comando `pnpm install` nos diretório de API e Web. Dentro da pasta "desafio-fullstack-api" confirme primeiro se a variavél `POSTGRES_HOST` no arquivo .env está como `localhost`. Os valores da .env devem ser:
 
 ```
 API_PORT=8080
 
-POSTGRES_HOST="postgres"
+POSTGRES_HOST="localhost"
 POSTGRES_PORT="5432"
 POSTGRES_USER="postgres"
 POSTGRES_PASSWORD="desafio"
@@ -33,7 +33,7 @@ Ao final sua aplicação deve estar rodando normalmente na porta 3000.
 
 ![](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 
-Após instalações das dependencias nos diretórios de API e Web, verifique se a variavél `POSTGRES_HOST` está como "postgres", sendo assim, o network do docker pode se comunicar entre as aplicações.
+Após instalações das dependencias nos diretórios de API e Web, verifique se a variavél `POSTGRES_HOST` está como `postgres`, sendo assim, o network do docker pode se comunicar entre as aplicações.
 
 Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação, desafio-fullstack.
 
