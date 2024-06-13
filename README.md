@@ -18,7 +18,7 @@ Ao final sua aplicação deve estar rodando normalmente na porta 3000.
 
 ![](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 
-Deve ser feito a mesma etapa anterior para a configuração do banco de dados, após isso, mudar o valor da variavel `POSTGRES_HOST` para "postgres", sendo assim, o networking do docker pode comunicar entre as aplicação.
+Deve ser feito a mesma etapa anterior para a configuração do banco de dados, após isso, mudar o valor da variavel `POSTGRES_HOST` para "postgres", sendo assim, o networking do docker pode comunicar entre as aplicações.
 
 Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação, desafio-fullstack.
 
