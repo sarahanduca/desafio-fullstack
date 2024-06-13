@@ -5,9 +5,10 @@
 ![pnpm](https://img.shields.io/badge/pnpm-yellow?style=for-the-badge&logo=pnpm&logoColor=white)
 
 ### Definição da .env
+
 É necessário criar uma .env no diretório desafio-fullstack-api. O valor de `API_PORT` deve ser `8080`.
 
-### Localmente
+<!-- ### Localmente
 
 Após feito o clone do repositório, é necessário instalar as dependencias, execute o comando `pnpm install` nos diretório de API e Web. Dentro da pasta "desafio-fullstack-api" confirme primeiro se a variavél `POSTGRES_HOST` no arquivo .env está como `localhost`. Os valores da .env devem ser:
 
@@ -27,15 +28,28 @@ Agora o banco de dados está configurado e basta executar o serviço da API (que
 
 É necessário esar dentro do respectivo diretório para a execussão do comando, portanto, para rodar o frontend da aplicação deve-se estra na pasta "desafio-fullstack-web" e executar o comando `pnpm dev`.
 
-Ao final sua aplicação deve estar rodando normalmente na porta 3000.
+Ao final sua aplicação deve estar rodando normalmente na porta 3000. -->
 
 ### Utilizando Docker
 
 ![](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 
 Após instalações das dependencias nos diretórios de API e Web, verifique se a variavél `POSTGRES_HOST` está como `postgres`, sendo assim, o network do docker pode se comunicar entre as aplicações.
+Os valores da .env devem ser:
+
+```
+API_PORT=8080
+
+POSTGRES_HOST="localhost"
+POSTGRES_PORT="5432"
+POSTGRES_USER="postgres"
+POSTGRES_PASSWORD="desafio"
+POSTGRES_DB="desafiofullstack"
+```
 
 Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação, desafio-fullstack.
+
+Para utilizar apenas o BD no docker é necessário alterar o valor da variavel `POSTGRES_HOST` no arquivo .env para `localhost`.
 
 ## Backend
 
@@ -47,103 +61,141 @@ Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação
 
 - GET
 
-  ```
-  /levels?page=1&limit=10
-  ```
+```
 
-  Retorna todos os níveis do BD, com o a estrutura.
+/levels?page=1&limit=10
 
-  ```
-  {
-    id: number,
-    level: string
-  }
-  ```
+```
+
+Retorna todos os níveis do BD, com o a estrutura.
+
+```
+
+{
+id: number,
+level: string
+}
+
+```
 
 - POST
-  ```
-  /levels
-  ```
-  Retorna o nível que foi criado.
 
-* PATCH
+```
 
-  ```
-  /levels/:id
-  ```
+/levels
 
-  Retorna o novo nível editado.
+```
 
-* DELETE
-  ```
-  /levels/:id
-  ```
-  Deleta o nível selecionado, se não houver desenvolvedores associados.
-* GET
-  ```
+Retorna o nível que foi criado.
+
+- PATCH
+
+```
+
+/levels/:id
+
+```
+
+Retorna o novo nível editado.
+
+- DELETE
+
+```
+
+/levels/:id
+
+```
+
+Deleta o nível selecionado, se não houver desenvolvedores associados.
+
+- GET
+
+```
+
     /levels/:id
-  ```
-  Retorna o nível do ID correspondente.
-  - GET
-  ```
+
+```
+
+Retorna o nível do ID correspondente.
+
+- GET
+
+```
+
     /levels/:id/developers
-  ```
-  Retorna todos os desenvolvedores associados aquele nível.
+
+```
+
+Retorna todos os desenvolvedores associados aquele nível.
 
 ### Desenvolvedor
 
 - GET
 
-  ```
-  /developers?page=1&limit=10
-  ```
+```
 
-  Retorna todos os desenvolvedores do BD, com o a estrutura.
+/developers?page=1&limit=10
 
-  ```
-  {
-    id: number,
-    name: string,
-    gender: string,
-    birthday: Date,
-    age: number,
-    hobby: string,
-    level: {
-      id: number,
-      level: string
-    }
-  }
-  ```
+```
 
-* POST
+Retorna todos os desenvolvedores do BD, com o a estrutura.
 
-  ```
-  /developers
-  ```
+```
 
-  Retorna o desenvolvedor que foi criado.
+{
+id: number,
+name: string,
+gender: string,
+birthday: Date,
+age: number,
+hobby: string,
+level: {
+id: number,
+level: string
+}
+}
 
-* PATCH
+```
 
-  ```
-  /developers/:id
-  ```
+- POST
 
-  Retorna o novo desenvolvedor editado.
+```
 
-* DELETE
+/developers
 
-  ```
-  /developers/:id
-  ```
+```
 
-  Deleta o desenvolvedor selecionado.
+Retorna o desenvolvedor que foi criado.
 
-* GET
-  ```
-  /developers/:id
-  ```
-  Retorna o desenvolvedor do ID correspondente.
+- PATCH
+
+```
+
+/developers/:id
+
+```
+
+Retorna o novo desenvolvedor editado.
+
+- DELETE
+
+```
+
+/developers/:id
+
+```
+
+Deleta o desenvolvedor selecionado.
+
+- GET
+
+```
+
+/developers/:id
+
+```
+
+Retorna o desenvolvedor do ID correspondente.
 
 ## Frontend
 
@@ -151,3 +203,7 @@ Com isso feito, basta rodar o comando `docker compose up` na raiz da aplicação
 
 ![Nextjs](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white) e [SWR](https://swr.vercel.app/) para o fetch de dados no client-side.
+
+```
+
+```
