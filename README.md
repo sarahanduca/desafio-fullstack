@@ -17,8 +17,8 @@ API_PORT=8080
 
 POSTGRES_HOST="localhost"
 POSTGRES_PORT="5432"
-POSTGRES_USER="postgres"
-POSTGRES_PASSWORD="desafio"
+POSTGRES_USER="admin"
+POSTGRES_PASSWORD="admin"
 POSTGRES_DB="desafiofullstack"
 ```
 
